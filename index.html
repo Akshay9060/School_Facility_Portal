@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Facility Condition Reporting & Repair Tracking Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ==================== LANDING PAGE ==================== -->
+    <div id="landingPage" class="page active">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-school"></i>
+                    <span>School Facility Portal</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" onclick="showPage('landingPage')">Home</a>
+                    <a href="#" onclick="showPage('landingPage')">Features</a>
+                    <a href="#" onclick="showPage('landingPage')">About</a>
+                    <button class="btn btn-outline" onclick="showPage('loginPage')">Login</button>
+                    <button class="btn btn-primary" onclick="showPage('registerPage')">Register</button>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    Ministry of Education Initiative
+                </div>
+                <h1>Report & Track <span>School Facility</span> Issues</h1>
+                <p>Empowering parents, teachers, and administrators to identify, report, and resolve infrastructure issues quickly and transparently.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="showPage('registerPage')">
+                        <i class="fas fa-user-plus"></i> Get Started
+                    </button>
+                    <button class="btn btn-outline btn-large" onclick="showPage('loginPage')">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalIssuesStat">0</span>
+                        <span class="stat-label">Issues Reported</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="resolvedIssuesStat">0</span>
+                        <span class="stat-label">Issues Resolved</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="activeUsersStat">0</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-illustration">
+                    <i class="fas fa-school-circle"></i>
+                    <div class="floating-icons">
+                        <i class="fas fa-tools"></i>
+                        <i class="fas fa-clipboard-check"></i>
+                        <i class="fas fa-bell"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Features</span>
+                    <h2>How the Portal Works</h2>
+                    <p>Streamlined process for reporting and tracking school facility issues</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-flag"></i></div>
+                        <h3>Report Issues</h3>
+                        <p>Quickly report infrastructure problems with photos and location details</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Track Progress</h3>
+                        <p>Monitor repair status in real-time with detailed timeline updates</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                        <h3>Get Notifications</h3>
+                        <p>Receive instant alerts when your reported issue is updated or resolved</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3>Admin Management</h3>
+                        <p>School administrators can assign tasks and monitor resolution progress</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== LOGIN PAGE ==================== -->
+    <div id="loginPage" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <i class="fas fa-school"></i>
+                    <h2>Welcome Back</h2>
+                    <p>Login to your school facility portal</p>
+                </div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <div id="loginError" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <p class="auth-footer">
+                    Don't have an account? <a href="#" onclick="showPage('registerPage')">Register here</a>
+                </p>
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Admin: admin@school.edu / admin123</p>
+                    <p>Teacher: teacher@school.edu / teacher123</p>
+                    <p>Parent: parent@school.edu / parent123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== REGISTER PAGE ==================== -->
+    <div id="registerPage" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <i class="fas fa-user-plus"></i>
+                    <h2>Create Account</h2>
+                    <p>Join the School Facility Reporting Portal</p>
+                </div>
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="regName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="regPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user-tag"></i> Role</label>
+                        <select id="regRole" required>
+                            <option value="">Select your role</option>
+                            <option value="parent">Parent</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">School Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> School Name</label>
+                        <input type="text" id="regSchool" placeholder="Enter your school name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="regPassword" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <div id="registerError" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                <p class="auth-footer">
+                    Already have an account? <a href="#" onclick="showPage('loginPage')">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <div id="dashboardPage" class="page">
+        <nav class="navbar dashboard-nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-school"></i>
+                    <span>School Facility Portal</span>
+                </div>
+                <div class="nav-links">
+                    <span class="user-greeting" id="userGreeting">Welcome, User</span>
+                    <button class="btn btn-ghost" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <button class="sidebar-link active" data-page="dashboardOverview" onclick="switchDashboardTab('dashboardOverview')">
+                        <i class="fas fa-chart-pie"></i> Overview
+                    </button>
+                    <button class="sidebar-link" data-page="reportIssue" onclick="switchDashboardTab('reportIssue')">
+                        <i class="fas fa-flag"></i> Report Issue
+                    </button>
+                    <button class="sidebar-link" data-page="myIssues" onclick="switchDashboardTab('myIssues')">
+                        <i class="fas fa-list"></i> My Issues
+                    </button>
+                    <button class="sidebar-link" data-page="tracking" onclick="switchDashboardTab('tracking')">
+                        <i class="fas fa-chart-line"></i> Tracking
+                    </button>
+                    <button class="sidebar-link" data-page="notifications" onclick="switchDashboardTab('notifications')">
+                        <i class="fas fa-bell"></i> Notifications
+                        <span class="badge" id="notificationBadge">0</span>
+                    </button>
+                    <button class="sidebar-link" data-page="adminPanel" onclick="switchDashboardTab('adminPanel')" id="adminPanelLink" style="display:none;">
+                        <i class="fas fa-user-shield"></i> Admin Panel
+                    </button>
+                </nav>
+            </aside>
+
+            <main class="dashboard-content">
+                <!-- Overview Tab -->
+                <div id="dashboardOverview" class="dashboard-tab active">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-chart-pie"></i> Dashboard Overview</h2>
+                        <p>Real-time summary of school facility issues</p>
+                    </div>
+                    <div class="stats-grid" id="overviewStats">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-flag"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="totalIssues">0</span>
+                                <span class="stat-label">Total Issues</span>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-pending">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="pendingIssues">0</span>
+                                <span class="stat-label">Pending</span>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-progress">
+                            <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="inProgressIssues">0</span>
+                                <span class="stat-label">In Progress</span>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-resolved">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="resolvedIssues">0</span>
+                                <span class="stat-label">Resolved</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Issue Categories</h3>
+                        <div class="category-chart" id="categoryChart"></div>
+                    </div>
+                    <div class="recent-issues">
+                        <h3>Recent Issues</h3>
+                        <div id="recentIssuesList"></div>
+                    </div>
+                </div>
+
+                <!-- Report Issue Tab -->
+                <div id="reportIssue" class="dashboard-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-flag"></i> Report an Issue</h2>
+                        <p>Submit details about facility problems you've observed</p>
+                    </div>
+                    <form id="reportForm" onsubmit="handleReportIssue(event)" class="report-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Issue Category</label>
+                                <select id="issueCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="furniture">Broken Furniture</option>
+                                    <option value="toilet">Damaged Toilet</option>
+                                    <option value="electrical">Electrical Hazard</option>
+                                    <option value="plumbing">Plumbing Issue</option>
+                                    <option value="infrastructure">Infrastructure Damage</option>
+                                    <option value="sanitation">Poor Sanitation</option>
+                                    <option value="safety">Safety Hazard</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-exclamation-triangle"></i> Priority Level</label>
+                                <select id="issuePriority" required>
+                                    <option value="">Select priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Location in School</label>
+                            <input type="text" id="issueLocation" placeholder="e.g., Building A, 2nd Floor, Room 201" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-heading"></i> Issue Title</label>
+                            <input type="text" id="issueTitle" placeholder="Brief title for the issue" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-align-left"></i> Description</label>
+                            <textarea id="issueDescription" rows="4" placeholder="Provide detailed description of the issue" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-image"></i> Upload Photos (Optional)</label>
+                            <input type="file" id="issueImages" accept="image/*" multiple>
+                            <small>You can upload multiple images to help identify the issue</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Submit Report
+                        </button>
+                    </form>
+                </div>
+
+                <!-- My Issues Tab -->
+                <div id="myIssues" class="dashboard-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-list"></i> My Reported Issues</h2>
+                        <p>Track all issues you've reported</p>
+                    </div>
+                    <div class="filter-bar">
+                        <select id="filterStatus" onchange="filterMyIssues()">
+                            <option value="all">All Issues</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                        <select id="filterCategory" onchange="filterMyIssues()">
+                            <option value="all">All Categories</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="toilet">Toilet</option>
+                            <option value="electrical">Electrical</option>
+                            <option value="plumbing">Plumbing</option>
+                            <option value="infrastructure">Infrastructure</option>
+                            <option value="sanitation">Sanitation</option>
+                            <option value="safety">Safety</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div id="myIssuesList"></div>
+                </div>
+
+                <!-- Tracking Tab -->
+                <div id="tracking" class="dashboard-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-chart-line"></i> Issue Tracking</h2>
+                        <p>Real-time progress of reported issues</p>
+                    </div>
+                    <div id="trackingList"></div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div id="notifications" class="dashboard-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-bell"></i> Notifications</h2>
+                        <p>Stay updated on your reported issues</p>
+                    </div>
+                    <div id="notificationsList"></div>
+                </div>
+
+                <!-- Admin Panel Tab -->
+                <div id="adminPanel" class="dashboard-tab">
+                    <div class="tab-header">
+                        <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+                        <p>Manage and track all reported issues</p>
+                    </div>
+                    <div class="admin-stats">
+                        <div class="admin-stat-card">
+                            <span class="admin-stat-number" id="adminTotalIssues">0</span>
+                            <span class="admin-stat-label">Total Issues</span>
+                        </div>
+                        <div class="admin-stat-card">
+                            <span class="admin-stat-number" id="adminPendingIssues">0</span>
+                            <span class="admin-stat-label">Pending</span>
+                        </div>
+                        <div class="admin-stat-card">
+                            <span class="admin-stat-number" id="adminAvgResolutionTime">0h</span>
+                            <span class="admin-stat-label">Avg Resolution Time</span>
+                        </div>
+                        <div class="admin-stat-card">
+                            <span class="admin-stat-number" id="adminResolutionRate">0%</span>
+                            <span class="admin-stat-label">Resolution Rate</span>
+                        </div>
+                    </div>
+                    <div id="adminIssuesList"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
